@@ -1,0 +1,63 @@
+#include <iostream>
+using namespace std;
+struct node
+{
+    int data;
+    struct node *next;
+    struct node *prev;
+};
+struct node *iaf(struct node *head,int data)
+{
+    struct node *ptr=(struct node*)malloc(sizeof(struct node*));
+    ptr->data=data;
+    ptr->next=head;
+    head->prev=ptr;
+    ptr->prev=NULL;
+    return ptr;
+};
+struct node *ial(struct node* head,int data)
+{
+    struct node *ptr=(struct node*)malloc(sizeof(struct node));
+    ptr->data=data;
+    struct node *p;
+    while(p->next!=NULL)
+    {
+        p=p->next;
+    }
+    p->next=ptr;
+    ptr->next=NULL;
+    ptr->prev=p;
+    return head;
+};
+void llt(struct node *p)
+{
+    while(p!=NULL)
+    {
+        cout<<p->data<<endl;
+        p=p->next;
+    }
+}
+void lltfb(struct node *p)
+{
+    while(p->next!=NULL)
+    {
+        p=p->next;
+    }
+    while(p!=NULL)
+    {
+        cout<<p->data<<" ";
+        p=p->prev;
+    }
+}
+int main()
+{
+    struct node *head=(struct node*)malloc(sizeof(struct node));
+    head->next=NULL;
+    head->data=5;
+    head->prev=NULL;
+    head=iaf(head,9);
+    head=ial(head,7);
+    llt(head);
+    lltfb(head);
+    return 0;
+}
