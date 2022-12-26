@@ -1,0 +1,70 @@
+#include <iostream>
+using namespace std;
+struct cqueue
+{
+    int s;
+    int f,r;
+    int *arr;
+};
+int isFull(struct cqueue *q)
+{
+    if((q->r+1)%q->s==q->f)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int isEmpty(struct cqueue *q)
+{
+    if((q->f+1)%q->s==q->r)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+void Enqueue(struct cqueue *q,int data)
+{
+    if(isFull(q))
+    {
+        cout<<"Circular Queue Overflow\n";
+    }
+    else
+    {
+        q->r=(q->r+1)%q->s;
+        q->arr[q->r]=data;
+    }
+}
+void Dequeue(struct cqueue *q)
+{
+    if(isEmpty(q))
+    {
+        cout<<"Circular Queue Underflow\n";
+    }
+    else
+    {
+        q->f=(q->f+1)%q->s;
+        int n;
+        n=q->arr[q->f];
+        cout<<n;
+    }
+}
+int main()
+{
+    struct cqueue *q=(struct cqueue*)malloc(sizeof(struct cqueue));
+    q->s=4;
+    q->r=0;
+    q->f=0;
+    q->arr=(int*)malloc(q->s*sizeof(int));
+    Dequeue(q);
+    Enqueue(q,3);
+    Enqueue(q,5);
+    Enqueue(q,1);
+    Enqueue(q,8);
+    return 0;
+}
