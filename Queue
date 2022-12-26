@@ -1,0 +1,74 @@
+#include <iostream>
+using namespace std;
+struct Queue
+{
+    int s;
+    int f,r;
+    int *arr;
+};
+int is_full(struct Queue *q)
+{
+    if(q->r==q->s-1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int is_Empty(struct Queue *q)
+{
+    if(q->f==q->r)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+void Enqueue(struct Queue *q,int data)
+{
+    if(is_full(q))
+    {
+        cout<<"Queue Overflow\n";
+    }
+    else
+    {
+        q->r++;
+        q->arr[q->r]=data;
+    }
+}
+void dequeue(struct Queue *q)
+{
+    if(is_Empty(q))
+    {
+        cout<<"Queue Underflow\n";
+    }
+    else
+    {
+        q->f++;
+        cout<<q->arr[q->f]<<"\n";
+    }
+}
+int main()
+{
+    struct Queue *q=(struct Queue*)malloc(sizeof(struct Queue));
+    q->s=4;
+    q->f=-1;
+    q->r=-1;
+    q->arr=(int*)malloc(q->s*sizeof(int));
+    dequeue(q);
+    Enqueue(q,4);
+    Enqueue(q,5);
+    Enqueue(q,2);
+  //  Enqueue(q,1);
+
+    //Enqueue(q,1);
+    dequeue(q);
+    dequeue(q);
+    dequeue(q);
+    dequeue(q);
+    return 0;
+}
