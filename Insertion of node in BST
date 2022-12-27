@@ -1,0 +1,32 @@
+void Insert(struct node *root,int data)
+{
+    struct node *ptr=(struct node*)malloc(sizeof(struct node));
+    ptr->left=NULL;
+    ptr->right=NULL;
+    ptr->data=data;
+    struct node *prev;
+    while(root!=NULL)
+    {
+        prev=root;
+        if(root->data==data)
+        {
+            return;
+        }
+        else if(root->data>data)
+        {
+            root=root->left;
+        }
+        else
+        {
+            root=root->right;
+        }
+    }
+    if(prev->data>data)
+    {
+        prev->left=ptr;
+    }
+    else
+    {
+        prev->right=ptr;
+    }
+}
