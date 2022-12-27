@@ -1,0 +1,55 @@
+struct node *InorderPre(struct node * root)
+{
+    root=root->left;
+    while(root->right!=NULL)
+    {
+        root=root->right;
+    }
+    return root;
+};
+struct node *Inordersucc(struct node * root)
+{
+    root=root->right;
+    while(root->left!=NULL)
+    {
+        root=root->left;
+    }
+    return root;
+};
+struct node* Delete(struct node *root,int data)
+{
+    struct node *ipre;
+    if(root==NULL)
+    {
+        return NULL;
+    }
+    if(root->left==NULL && root->right==NULL)
+    {
+        free(root);
+        return NULL;
+    }
+    if(root->data>data)
+    {
+        root->left=Delete(root->left,data);
+    }
+    else if(root->data<data)
+    {
+        root->right=Delete(root->right,data);
+    }
+    else
+    {
+        if(root->right==NULL)
+        {
+            ipre=InorderPre(root);
+            root->data=ipre->data;
+            root->left=Delete(root->left,ipre->data);
+        }
+        else
+        {
+            ipre=Inordersucc(root);
+            root->data=ipre->data;
+            root->right=Delete(root->right,ipre->data);
+        }
+    }
+    return root;
+}
