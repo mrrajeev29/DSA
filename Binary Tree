@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+struct node
+{
+    int data;
+    struct node *left;
+    struct node *right;
+};
+struct node* CreateNode(int data)
+{
+    struct node *ptr=(struct node*)malloc(sizeof(struct node));
+    ptr->data=data;
+    ptr->left=NULL;
+    ptr->right=NULL;
+}
+int main()
+{
+    struct node *root=(struct node*)malloc(sizeof(struct node));
+    root->data=5;
+    root->left=NULL;
+    root->right=NULL;
+    struct node *p1=CreateNode(3);
+    struct node *p2=CreateNode(8);
+    struct node *p3=CreateNode(7);
+    struct node *p4=CreateNode(10);
+    struct node *p5=CreateNode(4);
+    root->left=p1;
+    root->right=p2;
+    p1->left=p3;
+    p1->right=p4;
+    p2->left=p5;
+    return 0;
+}
