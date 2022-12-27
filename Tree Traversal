@@ -1,0 +1,27 @@
+void Inorder(struct node *root)
+{
+    if(root!=NULL)
+    {
+        Inorder(root->left);
+        cout<<root->data<<" ";
+        Inorder(root->right);
+    }
+}
+void PreOrder(struct node *root)
+{
+    if(root!=NULL)
+    {
+        cout<<root->data<<" ";
+        PreOrder(root->left);
+        PreOrder(root->right);
+    }
+}
+void PostOrder(struct node *root)
+{
+    if(root!=NULL)
+    {
+        PostOrder(root->left);
+        PostOrder(root->right);
+        cout<<root->data<<" ";
+    }
+}
