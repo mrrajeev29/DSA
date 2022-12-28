@@ -1,0 +1,72 @@
+#include <iostream>
+using namespace std;
+struct node
+{
+    int data;
+    struct node *left;
+    struct node *right;
+};
+void Insert(struct node *root,int data)
+{
+    struct node *ptr=(struct node*)malloc(sizeof(struct node));
+    ptr->data=data;
+    ptr->left=NULL;
+    ptr->right=NULL;
+    struct node *prev;
+    while(root!=NULL)
+    {
+        prev=root;
+        if(root->data==data)
+        {
+            return;
+        }
+        else if(root->data>data)
+        {
+            root=root->left;
+        }
+        else
+        {
+            root=root->right;
+        }
+    }
+    if(prev->data>data)
+    {
+        prev->left=ptr;
+    }
+    else
+    {
+        prev->right=ptr;
+    }
+}
+void MaxValue(struct node *root)
+{
+    while(root->left!=NULL)
+    {
+        root=root->left;
+    }
+    cout<<root->data<<endl;
+}
+void MinValue(struct node *root)
+{
+    while(root->right!=NULL)
+    {
+        root=root->right;
+    }
+    cout<<root->data<<endl;
+}
+int main()
+{
+    struct node *root=(struct node *)malloc(sizeof(struct node));
+    root->data=6;
+    root->left=NULL;
+    root->right=NULL;
+    Insert(root,4);
+    Insert(root,8);
+    Insert(root,5);
+    Insert(root,7);
+    Insert(root,12);
+    Insert(root,2);
+    MaxValue(root);
+    MinValue(root);
+    return 0;
+}
