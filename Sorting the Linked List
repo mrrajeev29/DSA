@@ -1,0 +1,20 @@
+    ListNode* SortLinkedList(ListNode* head) 
+    {
+        ListNode *q=head;
+        while(q!=NULL)
+        {
+            ListNode *p=q->next;
+            while(p!=NULL)
+            {
+                if(q->val>p->val)
+                {
+                    int a=q->val;
+                    q->val=p->val;
+                    p->val=a;
+                }
+                p=p->next;
+            }
+            q=q->next;
+        }    
+        return head;
+    }
