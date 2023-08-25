@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// Function for DFS traversal of a disconnected graph
+void dfsDisconnected(vector<vector<int>>& graph, int vertex, vector<bool>& visited) {
+    visited[vertex] = true;
+    cout << vertex << " ";
+
+    for (int neighbor : graph[vertex]) {
+        if (!visited[neighbor]) {
+            dfsDisconnected(graph, neighbor, visited);
+        }
+    }
+}
+
+// Function to perform DFS on all components of a disconnected graph
+void dfsDisconnectedGraph(vector<vector<int>>& graph, int numVertices) {
+    vector<bool> visited(numVertices, false);
+
+    for (int vertex = 0; vertex < numVertices; ++vertex) {
+        if (!visited[vertex]) {
+            dfsDisconnected(graph, vertex, visited);
+        }
+    }
+}
+
+int main() {
+    int numVertices, numEdges;
+    cout << "Enter the number of vertices and edges: ";
+    cin >> numVertices >> numEdges;
+
+    vector<vector<int>> graph(numVertices);
+
+    cout << "Enter the edges (format: source destination):" << endl;
+    for (int i = 0; i < numEdges; ++i) {
+        int source, destination;
+        cin >> source >> destination;
+        graph[source].push_back(destination);
+        graph[destination].push_back(source); // For undirected graph
+    }
+
+    cout << "DFS traversal of disconnected graph:" << endl;
+    dfsDisconnectedGraph(graph, numVertices);
+
+    return 0;
+}
