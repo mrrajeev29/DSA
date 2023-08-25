@@ -1,4 +1,4 @@
-// BFS algorithm in C++
+// BFS algorithm in C++ for connected graph
 
 #include <iostream>
 #include <list>
