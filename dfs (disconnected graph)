@@ -1,0 +1,52 @@
+#include <iostream>
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+// Function to perform BFS on a disconnected graph
+void bfsDisconnected(vector<vector<int>>& graph, int start, vector<bool>& visited) {
+    queue<int> q;
+    q.push(start);
+    visited[start] = true;
+    while (!q.empty()) {
+        int current = q.front();
+        q.pop();
+        cout << current << " ";
+        for (int neighbor : graph[current]) {
+            if (!visited[neighbor]) {
+                q.push(neighbor);
+                visited[neighbor] = true;
+            }
+        }
+    }
+}
+
+// Function to perform BFS on all components of a disconnected graph
+void bfsDisconnectedGraph(vector<vector<int>>& graph, int numVertices) {
+    vector<bool> visited(numVertices, false);
+    for (int vertex = 0; vertex < numVertices; ++vertex) 
+    {
+        if (!visited[vertex]) 
+        {
+            bfsDisconnected(graph, vertex, visited);
+        }
+    }
+}
+int main() 
+{
+    int numVertices, numEdges;
+    cout << "Enter the number of vertices and edges: ";
+    cin >> numVertices >> numEdges;
+    vector<vector<int>> graph(numVertices);
+    cout << "Enter the edges (format: source destination):" << endl;
+    for (int i = 0; i < numEdges; ++i) {
+        int source, destination;
+        cin >> source >> destination;
+        graph[source].push_back(destination);
+        graph[destination].push_back(source); // For undirected graph
+    }
+    cout << "BFS traversal of disconnected graph:" << endl;
+    bfsDisconnectedGraph(graph, numVertices);
+    return 0;
+}
