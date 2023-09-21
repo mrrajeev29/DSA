@@ -1,0 +1,8 @@
+string findSmallestLexicographicalString(vector<string>& arr) {
+    if (arr.empty()) 
+    {
+        return "";
+    }
+    auto minElement =min_element(arr.begin(), arr.end());
+    return *minElement;
+}
